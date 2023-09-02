@@ -1,9 +1,16 @@
 import RecipePreview from '@/components/recipe/RecipePreview';
 import styles from './page.module.css';
-import { RecipePreviewProps } from '@/types/RecipePreviewProps';
 import { search } from '@/types/search';
 import { RecipeService } from '@/service/recipe.service';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export function metadata(): Metadata {
+  return {
+    title: 'Pesquisar Receitas',
+    description: 'Site de Receitas - feitos apra aprendizado',
+  }
+}
 
 type props = {
   searchParams: search

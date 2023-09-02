@@ -3,8 +3,6 @@ import { Recipe } from '@/types/Recipe'
 import styles from './page.module.css'
 import { notFound } from 'next/navigation';
 import { Types } from 'mongoose';
-import { Ingredient } from '../../../types/Recipe';
-import { useState } from 'react';
 
 const recipeService = new RecipeService();
 
@@ -17,6 +15,7 @@ interface props {
 function getImgUrl(id: Types.ObjectId) {
   return `/images/recipe/${id.toString()}.jpg`
 }
+
 export default async function ViewRecipe({ params: { url } }: props) {
   const recipe: Recipe | null = await recipeService.getByUrl(url);
   if (!recipe || !recipe._id) {
@@ -24,6 +23,19 @@ export default async function ViewRecipe({ params: { url } }: props) {
   };
 
   return <main className={styles.main}>
+    <>
+      <title>{recipe.name}</title>
+      <meta name="description" content={recipe.name} key="desc" />
+      <meta property="og:title" content="Social Title for Cool Page" />
+      <meta
+        property="og:description"
+        content={styles.description}
+      />
+      <meta
+        property="og:image"
+        content={getImgUrl(recipe._id)}
+      />
+    </>
     <section >
       <h1 className={styles.title}>
         {recipe.name}
