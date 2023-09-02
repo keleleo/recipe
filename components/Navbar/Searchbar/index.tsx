@@ -8,7 +8,7 @@ function Searchbar() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [text, setText] = useState(searchParams.get('search') || "");
-  useEffect(() => setText(searchParams.get('search') || ""), [searchParams.get('search')])
+  
   function handleOnInput(e: ChangeEvent<HTMLInputElement>) {
     setText(e.target.value);
   }

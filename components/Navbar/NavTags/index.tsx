@@ -16,9 +16,9 @@ function NavTags() {
 
   return <>
     {
-      tags.map(m=><Link href={`/q?search=${m}&page=1`} className={style.link}>{m}</Link>)
+      tags.map((m, i) => <Link key={i} href={`/q?search=${m}&page=1`} className={style.link}>{m}</Link>)
     }
-    
+
   </>
 }
 
