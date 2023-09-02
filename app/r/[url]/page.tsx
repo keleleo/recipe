@@ -29,7 +29,7 @@ export default async function ViewRecipe({ params: { url } }: props) {
       <meta property="og:title" content="Social Title for Cool Page" />
       <meta
         property="og:description"
-        content={styles.description}
+        content={recipe.description}
       />
       <meta
         property="og:image"
