@@ -1,0 +1,14 @@
+.recipe-list{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pag-container{
+  margin-bottom: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}

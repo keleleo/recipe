@@ -1,0 +1,58 @@
+.main {
+  min-height: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 2.4em;
+}
+
+.title, .description, .image-container {
+  margin: 10px 0;
+}
+
+.description {}
+
+.image-container {
+  width: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  /* overflow: clip; */
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+.details .detail :first-child {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.list {
+  /* padding-left: 20px; */
+}
+
+.list .row {
+  margin: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.list .row input {
+  margin-right: 10px;
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.list .row:has(input:checked) {
+  text-decoration-line: line-through;
+}

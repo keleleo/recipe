@@ -1,0 +1,38 @@
+.recipe-preview {
+  width: 400px;
+  /* height: 350px; */
+  background-color: var(--rec-prev-background);
+  border-radius: 5px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.description {
+  /* height: 100%; */
+}
+
+.image, .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.image-notfound {
+  background-color: rgb(184, 184, 184);
+  /* height: 100%; */
+  height: 200px;
+  width: 100%;
+  font-size: 1.6em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
