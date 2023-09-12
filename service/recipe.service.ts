@@ -18,17 +18,29 @@ export class RecipeService {
         'name description url details ingredients steps').exec()
   }
 
+  async getByRecipe(recipe: Recipe): Promise<RecipeModelDTO[]> {
+    return await RecipeModel.find({
+      _id:{$ne:recipe._id},
+      $or: [
+        { name: { $in: [recipe.name.toString()] } },
+        { ingredients: { $in: recipe.ingredients } }
+      ]
+    }, 'name description url details ingredients steps')
+      .limit(4)
+      .transform(RecipeDTOTransform).exec()
+  }
+
   async getSearchNumberOfPage(search: string): Promise<number> {
     const count = await RecipeModel
-    .find({
-      $or: [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-        { ingredients: { $elemMatch: { $regex: search, $options: 'i' } } },
-        { steps: { $elemMatch: { $regex: search, $options: 'i' } } }
-      ]
-    }, '_id name description url').count().exec()
-    return Math.ceil(count/ITEMS_PER_PAGE);
+      .find({
+        $or: [
+          { name: { $regex: search, $options: 'i' } },
+          { description: { $regex: search, $options: 'i' } },
+          { ingredients: { $elemMatch: { $regex: search, $options: 'i' } } },
+          { steps: { $elemMatch: { $regex: search, $options: 'i' } } }
+        ]
+      }, '_id name description url').count().exec()
+    return Math.ceil(count / ITEMS_PER_PAGE);
   }
 
   async searchPage({ search = '', page = 1 }: search): Promise<RecipeModelDTO[]> {
@@ -52,7 +64,7 @@ export class RecipeService {
     const data = await this.searchPage({ search, page });
     return {
       numberOfPages,
-      data:data
+      data: data
     } as Pagination<RecipeModelDTO>
   }
 

@@ -1,7 +1,7 @@
 import style from './style.module.css'
 import Link from 'next/link';
 import { RecipeModelDTO } from '@/types/Recipe';
-const IMAGE_URL_BASE = './images/recipe/'
+const IMAGE_URL_BASE = '/images/recipe/'
 function RecipePreview({ _id, name = '', description = '', url = '' }: RecipeModelDTO) {
   return (
     <Link href={'/r/' + url} className={style['recipe-preview']}>

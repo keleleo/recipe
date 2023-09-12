@@ -17,7 +17,7 @@ function Navbar() {
     <div className={style['icon-menu']} onClick={handleMenuIcon}>MenuIcon</div>
     <div className={`${style.group}`}>
       <div className={style.logo}>
-        <Link href={'/'}>Recitas</Link></div>
+        <Link href={'/'}>Receitas</Link></div>
     </div>
     <div className={style.content}>
 
