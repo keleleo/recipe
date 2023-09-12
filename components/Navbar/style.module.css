@@ -15,6 +15,14 @@
 
 .icon-menu {
   display: none;
+  font-size: 2em;
+  margin: 5px;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo {
@@ -32,10 +40,14 @@
   overflow: hidden;
 }
 
+.button-group h2 {
+  display: none;
+}
 
-@media screen and (max-width: 700px) {
+
+@media screen and (max-width: 540px) {
   .icon-menu {
-    display: block;
+    display: flex;
   }
 
   .navbar, .content {
@@ -44,7 +56,38 @@
   }
 
   .content {
-    background-color: red;
+    background-color: white;
     height: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: -100%;
+    padding: 10px;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    transition: all .1s;
+  }
+
+  .content .group {
+    width: 100%;
+  }
+
+  .navbar.open .content {
+    left: 0;
+    transition: all .4s;
+  }
+
+  .button-group {
+    height: 100%;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+
+  .button-group h2 {
+    display: block;
+  }
+
+  .search-bar {
+    width: 100%;
   }
 }
