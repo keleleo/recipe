@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 export function metadata(): Metadata {
   return {
     title: 'Receitas',
-    description: 'Site de Receitas - feitos apra aprendizado',
+    description: 'Site de Receitas',
   }
 }
 

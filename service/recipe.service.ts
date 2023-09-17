@@ -53,7 +53,7 @@ export class RecipeService {
           { steps: { $elemMatch: { $regex: search, $options: 'i' } } }
         ]
       }, '_id name description url')
-      .skip((page - 1) * ITEMS_PER_PAGE)
+      .skip(Math.max(0,page - 1) * ITEMS_PER_PAGE)
       .limit(ITEMS_PER_PAGE)
       .transform(RecipeDTOTransform).exec();
     return recipes

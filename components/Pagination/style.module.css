@@ -1,0 +1,36 @@
+.pagination{
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.bt-group{
+  display: flex;
+}
+.bt-group-area-left,
+.bt-group-area-right{
+  display: flex;
+  overflow: hidden;
+  height: 30px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.bt-group-area-left{
+  flex-direction: row-reverse;
+}
+.bt-index{
+  min-width:  30px;
+  height: 30px;
+  border:1px solid #eee;
+  background-color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+.selected{
+  background-color: #007bff;
+  color:white;
+  scale: 1.2;
+  border:none;
+  border-radius: 10px;
+}
