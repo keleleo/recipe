@@ -4,17 +4,20 @@ import styles from './page.module.css'
 import { notFound } from 'next/navigation';
 import { Types } from 'mongoose';
 import RecipePreview from '@/components/recipe/RecipePreview';
+import { Metadata } from 'next';
+import { getRecipeMetadata } from '@/utils/recipe.metadata';
+import { imgFromReceId } from '@/utils/imgfromrecipeid';
 
 const recipeService = new RecipeService();
-
 interface props {
   params: {
     url: string
   }
 }
 
-function getImgUrl(id: Types.ObjectId) {
-  return `/images/recipe/${id.toString()}.jpg`
+export async function generateMetadata({ params: { url } }: props): Promise<Metadata> {
+  const recipe: Recipe | null = await recipeService.getByUrl(url);
+  return getRecipeMetadata(recipe);
 }
 
 export default async function ViewRecipe({ params: { url } }: props) {
@@ -24,19 +27,6 @@ export default async function ViewRecipe({ params: { url } }: props) {
   };
   const receitas: RecipeModelDTO[] | null = await recipeService.getByRecipe(recipe);
   return <div className={styles.main}>
-    <>
-      <title>{recipe.name}</title>
-      <meta name="description" content={recipe.name} key="desc" />
-      <meta property="og:title" content="Social Title for Cool Page" />
-      <meta
-        property="og:description"
-        content={recipe.description}
-      />
-      <meta
-        property="og:image"
-        content={getImgUrl(recipe._id)}
-      />
-    </>
     <div className={styles.container}>
       <div >
         <h1 className={styles.title}>
@@ -46,7 +36,7 @@ export default async function ViewRecipe({ params: { url } }: props) {
           {recipe.description}
         </div>
         <div className={styles['image-container']}>
-          <img src={getImgUrl(recipe._id)} />
+          <img src={imgFromReceId(recipe._id)} />
         </div>
       </div>
       <div>

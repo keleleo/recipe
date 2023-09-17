@@ -5,7 +5,7 @@ import getConnection from '@/utils/db';
 import { Pagination } from '../models/pagination';
 
 const ITEMS_PER_PAGE = 20;
-
+const SITE_RECIPE_BASE_URL = process.env.SITE_RECIPE_BASE_URL || '';
 export class RecipeService {
 
   constructor() {
@@ -20,7 +20,7 @@ export class RecipeService {
 
   async getByRecipe(recipe: Recipe): Promise<RecipeModelDTO[]> {
     return await RecipeModel.find({
-      _id:{$ne:recipe._id},
+      _id: { $ne: recipe._id },
       $or: [
         { name: { $in: [recipe.name.toString()] } },
         { ingredients: { $in: recipe.ingredients } }
@@ -73,6 +73,11 @@ export class RecipeService {
     // temp.save();
     // return temp;
     throw new Error('Method not implemented')
+  }
+
+  async getAllUrl(): Promise<string[]> {
+    return (await RecipeModel.find({}, { url: 1 }))
+      .map(m => SITE_RECIPE_BASE_URL + m.url) || [];
   }
 }
 
