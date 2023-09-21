@@ -30,7 +30,7 @@ export class RecipeService {
       .transform(RecipeDTOTransform).exec()
   }
 
-  async getSearchNumberOfPage(search: string): Promise<number> {
+  async getSearchNumberOfPage(search: string, itemsPerPage: number): Promise<number> {
     const count = await RecipeModel
       .find({
         $or: [
@@ -40,7 +40,7 @@ export class RecipeService {
           { steps: { $elemMatch: { $regex: search, $options: 'i' } } }
         ]
       }, '_id name description url').count().exec()
-    return Math.ceil(count / ITEMS_PER_PAGE);
+    return Math.ceil(count / itemsPerPage);
   }
 
   async searchPage({ search = '', page = 1 }: search): Promise<RecipeModelDTO[]> {
@@ -53,14 +53,14 @@ export class RecipeService {
           { steps: { $elemMatch: { $regex: search, $options: 'i' } } }
         ]
       }, '_id name description url')
-      .skip(Math.max(0,page - 1) * ITEMS_PER_PAGE)
+      .skip(Math.max(0, page - 1) * ITEMS_PER_PAGE)
       .limit(ITEMS_PER_PAGE)
       .transform(RecipeDTOTransform).exec();
     return recipes
   }
 
   async search({ search = '', page = 1 }: search): Promise<Pagination<RecipeModelDTO>> {
-    const numberOfPages = await this.getSearchNumberOfPage(search);
+    const numberOfPages = await this.getSearchNumberOfPage(search, ITEMS_PER_PAGE);
     const data = await this.searchPage({ search, page });
     return {
       numberOfPages,
@@ -75,9 +75,11 @@ export class RecipeService {
     throw new Error('Method not implemented')
   }
 
-  async getAllUrl(): Promise<string[]> {
-    return (await RecipeModel.find({}, { url: 1 }))
-      .map(m => SITE_RECIPE_BASE_URL + m.url) || [];
+  async getAllUrl(index: number, itemsPerPage: number): Promise<string[]> {
+    return (await RecipeModel.find({}, { url: 1 })
+      .skip(Math.max(0, index - 1) * ITEMS_PER_PAGE)
+      .limit(itemsPerPage))
+      .map(m => SITE_RECIPE_BASE_URL + m.url);
   }
 }
 

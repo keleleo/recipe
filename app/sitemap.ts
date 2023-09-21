@@ -5,23 +5,20 @@ import { MetadataRoute } from 'next';
 const SITE_BASE_URL = process.env.SITE_BASE_URL || '';
 const recipeService = new RecipeService();
 const CACHE_DELAY = 1000 * 60 * 1
-const cachedRecipesURL = new FuctionCache(async () => {
-  return (await recipeService.getAllUrl()).map(v => ({ url: v }))
+
+const cachedRecipeCount = new FuctionCache(async () => {
+  return (await recipeService.getSearchNumberOfPage("", 100))
 }, CACHE_DELAY);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const recipesURL = await cachedRecipesURL.getData() || [];
+  const recipeCount = await cachedRecipeCount.getData();
 
   return [
     {
       url: SITE_BASE_URL,
     },
-    ...recipesURL
+    ...Array(recipeCount || 0).fill(1).map((v, i) => ({
+      url: `${SITE_BASE_URL}recipe-sitemap.xml?index=${i+1}`
+    }))
   ]
-}
-
-
-function getData() {
-  console.log('batata alada')
-  return Date.now().toString()
 }
