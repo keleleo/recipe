@@ -77,7 +77,7 @@ export class RecipeService {
 
   async getAllUrl(index: number, itemsPerPage: number): Promise<string[]> {
     return (await RecipeModel.find({}, { url: 1 })
-      .skip(Math.max(0, index - 1) * ITEMS_PER_PAGE)
+      .skip(Math.max(0, index - 1) * itemsPerPage)
       .limit(itemsPerPage))
       .map(m => SITE_RECIPE_BASE_URL + m.url);
   }
