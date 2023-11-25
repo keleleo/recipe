@@ -12,18 +12,18 @@ const RECOMENDED_COUNT = 4
 export default function Paginantion(props: props) {
   return <div className={style.pagination}>
     {getLeftButtons(props)}
-    <Link href={props.indexToUrl(props.currentIndex)}>
+    <a href={props.indexToUrl(props.currentIndex)}>
       <button className={`${style['bt-index']} ${style.selected}`}>{props.currentIndex}</button>
-    </Link>
+    </a>
     {getRightButtons(props)}
   </div>
 }
 
 function createBtn(indexToUrl: (index: number) => string, index: number, isSelected?: true) {
   const url = indexToUrl(index);
-  return <Link href={url}>
+  return <a href={url}>
     <button className={`${style['bt-index']} ${isSelected ? style.selected : ''}`}>{index}</button>
-  </Link>
+  </a>
 }
 function createDots() {
   return <button className={`${style['bt-index']}`}>...</button>

@@ -18,11 +18,11 @@ function NavTags({ onSelect }: props) {
 
   return <>
     {
-      tags.map((m, i) => <Link key={i}
+      tags.map((m, i) => <a key={i}
         href={`/q?search=${m}&page=1`}
         className={style.link}
         onClick={onSelect}
-      >{m}</Link>)
+      >{m}</a>)
     }
 
   </>

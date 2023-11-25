@@ -7,7 +7,7 @@ const SITE_RECIPE_BASE_URL = process.env.SITE_RECIPE_BASE_URL || '';
 
 function RecipePreview({ _id, name = '', description = '', url = '' }: RecipeModelDTO) {
   return (
-    <Link href={SITE_RECIPE_BASE_URL + url} className={style['recipe-preview']}>
+    <a href={SITE_RECIPE_BASE_URL + url} className={style['recipe-preview']}>
       <div className={style.header}>{name}</div>
       <div className={style.description}>{description}</div>
       <div className={style.image}>
@@ -16,7 +16,7 @@ function RecipePreview({ _id, name = '', description = '', url = '' }: RecipeMod
           <img src={_id ? imgFromReceId(_id) : ''} />
         }
       </div>
-    </Link>
+    </a>
   )
 }
 

@@ -8,7 +8,7 @@ export async function GET(request: NextRequest, teste: any) {
   const index: number | null = Number(request.nextUrl.searchParams.get('index'));
   let urls: string[] = []
   if (index) {
-    urls = (await recipeService.getAllUrl(index, 100)).map(generateUrls);
+    urls = (await recipeService.getAllUrl(index, 1000)).map(generateUrls);
   }
 
   return new Response(`<?xml version="1.0" encoding="UTF-8"?>

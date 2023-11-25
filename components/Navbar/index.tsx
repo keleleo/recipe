@@ -23,7 +23,7 @@ function Navbar() {
         <AiOutlineMenu />
       </div>
       <div className={style.logo}>
-        <Link href={'/'}>Receitas</Link></div>
+        <a href={'/'} >Receitas</a></div>
     </div>
     <div className={style.content}>
       <div className={`${style['button-group']}`}>
