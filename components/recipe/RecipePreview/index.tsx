@@ -1,13 +1,11 @@
 import style from './style.module.css'
-import Link from 'next/link';
 import { RecipeModelDTO } from '@/types/Recipe';
+import { getHostPath } from '@/utils/envUtils';
 import { imgFromReceId } from '@/utils/imgfromrecipeid';
-
-const SITE_RECIPE_BASE_URL = process.env.SITE_RECIPE_BASE_URL || '';
 
 function RecipePreview({ _id, name = '', description = '', url = '' }: RecipeModelDTO) {
   return (
-    <a href={SITE_RECIPE_BASE_URL + url} className={style['recipe-preview']}>
+    <a href={getHostPath() + 'r/' + url} className={style['recipe-preview']}>
       <div className={style.header}>{name}</div>
       <div className={style.description}>{description}</div>
       <div className={style.image}>

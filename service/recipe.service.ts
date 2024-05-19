@@ -3,9 +3,9 @@ import { Recipe, RecipeModelDTO, RecipeModelType } from '@/types/Recipe';
 import { search } from '@/types/search';
 import getConnection from '@/utils/db';
 import { Pagination } from '../models/pagination';
+import { getHostPath } from '@/utils/envUtils';
 
 const ITEMS_PER_PAGE = 20;
-const SITE_RECIPE_BASE_URL = process.env.SITE_RECIPE_BASE_URL || '';
 export class RecipeService {
 
   constructor() {
@@ -36,8 +36,6 @@ export class RecipeService {
         $or: [
           { name: { $regex: search, $options: 'i' } },
           { description: { $regex: search, $options: 'i' } },
-          { ingredients: { $elemMatch: { $regex: search, $options: 'i' } } },
-          { steps: { $elemMatch: { $regex: search, $options: 'i' } } }
         ]
       }, '_id name description url').count().exec()
     return Math.ceil(count / itemsPerPage);
@@ -49,8 +47,6 @@ export class RecipeService {
         $or: [
           { name: { $regex: search, $options: 'i' } },
           { description: { $regex: search, $options: 'i' } },
-          { ingredients: { $elemMatch: { $regex: search, $options: 'i' } } },
-          { steps: { $elemMatch: { $regex: search, $options: 'i' } } }
         ]
       }, '_id name description url')
       .skip(Math.max(0, page - 1) * ITEMS_PER_PAGE)
@@ -79,7 +75,7 @@ export class RecipeService {
     return (await RecipeModel.find({}, { url: 1 })
       .skip(Math.max(0, index - 1) * itemsPerPage)
       .limit(itemsPerPage))
-      .map(m => SITE_RECIPE_BASE_URL + m.url);
+      .map(m => getHostPath() + 'r/' + m.url);
   }
 }
 

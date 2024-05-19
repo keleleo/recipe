@@ -6,6 +6,7 @@
 
 .bt-group{
   display: flex;
+  width: 100%;
 }
 .bt-group-area-left,
 .bt-group-area-right{

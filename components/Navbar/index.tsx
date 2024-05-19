@@ -1,11 +1,10 @@
 'use client'
-import { MdRestaurantMenu } from "react-icons/md"; 
+import { MdRestaurantMenu } from "react-icons/md";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from 'react'
 import style from './style.module.css'
 import Searchbar from './Searchbar'
 import NavTags from './NavTags'
-import Link from 'next/link'
 
 function Navbar() {
   const [isOpen, setOpen] = useState(false)
