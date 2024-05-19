@@ -1,8 +1,8 @@
 import { RecipeService } from '@/service/recipe.service';
 import { FuctionCache } from '@/utils/fuctionCache';
+import { getHostPath } from '@/utils/envUtils';
 import { MetadataRoute } from 'next';
 
-const SITE_BASE_URL = process.env.SITE_BASE_URL || '';
 const recipeService = new RecipeService();
 const CACHE_DELAY = 1000 * 60 * 1
 
@@ -15,10 +15,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: SITE_BASE_URL,
+      url: getHostPath(),
     },
     ...Array(recipeCount || 0).fill(1).map((v, i) => ({
-      url: `${SITE_BASE_URL}recipe-sitemap.xml?index=${i+1}`
+      url: `${getHostPath()}recipe-sitemap.xml?index=${i+1}`
     }))
   ]
 }

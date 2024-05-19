@@ -1,7 +1,7 @@
 import { Recipe } from '@/types/Recipe';
 import { imgFromReceId } from './imgfromrecipeid';
+import { getHostPath } from './envUtils';
 
-const SITE_RECIPE_BASE_URL = process.env.SITE_RECIPE_BASE_URL || '';
 
 export function getRecipeMetadata(recipe: Recipe | null) {
   if (!recipe || !recipe._id) return {};
@@ -10,7 +10,7 @@ export function getRecipeMetadata(recipe: Recipe | null) {
     description: recipe.description,
     openGraph: {
       type: 'website',
-      url: SITE_RECIPE_BASE_URL + 'r/' + recipe.url,
+      url: getHostPath() + 'r/' + recipe.url,
       title: recipe.name,
       description: recipe.description,
       images: [{
